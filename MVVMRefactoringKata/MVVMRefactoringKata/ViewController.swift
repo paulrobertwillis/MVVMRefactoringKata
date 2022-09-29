@@ -17,23 +17,49 @@ class ViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private var countValue: Int = 0
+    private lazy var viewModel: ViewModelProtocol = ViewModel(
+        delegate: self,
+        viewModelConfig: ViewModelConfig(
+            backgroundColour: .yellow,
+            countValueLabelText: "Times Pressed: 0",
+            pressMeButtonIsEnabled: true
+        )
+    )
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.countValueLabel.text = String(self.countValue)
-
+        self.setupView()
+    }
+    
+    // MARK: - Setup
+    
+    private func setupView() {
+        self.countValueLabel.text = self.viewModel.countValueLabelText
+        self.mainView.backgroundColor = self.viewModel.backgroundColour
+        self.pressMeButton.isEnabled = self.viewModel.pressMeButtonIsEnabled
     }
     
     // MARK: - IBActions
 
-    @IBAction func pressMeButtonTapped(_ sender: UIButton) {
-        self.countValue += 1
-        
-        if self.countValue == 10 {
-            self.mainView.backgroundColor = .green
-        }
+    @IBAction private func pressMeButtonTapped(_ sender: UIButton) {
+        self.viewModel.didTapPressMeButton()
+    }
+}
+
+// MARK: - ViewModelDelegate
+
+extension ViewController: ViewModelDelegate {
+    func backgroundColourDidChange() {
+        self.mainView.backgroundColor = self.viewModel.backgroundColour
+    }
+    
+    func countValueLabelTextDidChange() {
+        self.countValueLabel.text = self.viewModel.countValueLabelText
+    }
+    
+    func pressMeButtonIsEnabledDidChange() {
+        self.pressMeButton.isEnabled = self.viewModel.pressMeButtonIsEnabled
     }
 }

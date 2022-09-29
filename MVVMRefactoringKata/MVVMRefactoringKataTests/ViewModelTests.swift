@@ -11,47 +11,93 @@ import UIKit
 
 class ViewModelTests: XCTestCase {
     
-    func test_viewModel_configuredCorrectlyWhenInstantiated() {
-        let viewModel = ViewModel()
+    // MARK: - Private Properties
+    
+    private var sut: ViewModel!
+    private var delegate: ViewModelDelegate!
+    
+    // MARK: - Lifecycle
+    
+    override func setUp() {
+        super.setUp()
+        self.delegate = MockViewModelDelegate()
         
-        XCTAssertEqual(viewModel.backgroundColour, .yellow)
-        XCTAssertEqual(viewModel.countValueLabelText, "Times Pressed: 0")
-        XCTAssertEqual(viewModel.pressMeButtonIsEnabled, true)
-        XCTAssertEqual(viewModel.countValue, 0)
+        let viewModelConfig = ViewModelConfig(
+            backgroundColour: .yellow,
+            countValueLabelText: "Times Pressed: 0",
+            pressMeButtonIsEnabled: true
+        )
+
+        
+        self.sut = ViewModel(delegate: self.delegate, viewModelConfig: viewModelConfig)
+    }
+    
+    override func tearDown() {
+        self.delegate = nil
+        self.sut = nil
+        super.tearDown()
+    }
+    
+    // MARK: - Tests
+    
+    func test_viewModel_configuredCorrectlyWhenInstantiated() {
+        XCTAssertEqual(self.sut.backgroundColour, .yellow)
+        XCTAssertEqual(self.sut.countValueLabelText, "Times Pressed: 0")
+        XCTAssertEqual(self.sut.pressMeButtonIsEnabled, true)
     }
     
     func test_viewModel_whenPressMeButtonIsTapped_shouldIncrementCountValue() {
-        let viewModel = ViewModel()
+        self.sut.didTapPressMeButton()
         
-//        let oldValue = viewModel.countValue
-        viewModel.didTapPressMeButton()
-        
-        XCTAssertEqual(viewModel.countValue, 1)
-        XCTAssertEqual(viewModel.countValueLabelText, "Times Pressed: 1")
+        XCTAssertEqual(self.sut.countValueLabelText, "Times Pressed: 1")
     }
     
     func test_viewModel_givenCountValueIs9_whenPressMeButtonIsTapped_then() {
-        let viewModel = ViewModel()
-        viewModel.countValue = 9
+        self.tapPressMeButton(times: 9)
+
+        self.sut.didTapPressMeButton()
         
-        viewModel.didTapPressMeButton()
-        
-        XCTAssertEqual(viewModel.countValue, 10)
-        XCTAssertEqual(viewModel.countValueLabelText, "Times Pressed: 10")
-        XCTAssertEqual(viewModel.backgroundColour, .green)
-        XCTAssertEqual(viewModel.pressMeButtonIsEnabled, false)
+        XCTAssertEqual(self.sut.countValueLabelText, "Times Pressed: 10")
+        XCTAssertEqual(self.sut.backgroundColour, .green)
+        XCTAssertEqual(self.sut.pressMeButtonIsEnabled, false)
     }
     
     func test_viewModel_givenCountValueIs10_whenPressMeButtonIsTapped_then() {
-        let viewModel = ViewModel()
-        viewModel.countValue = 10
+        self.tapPressMeButton(times: 10)
         
-        viewModel.didTapPressMeButton()
+        self.sut.didTapPressMeButton()
         
-        XCTAssertEqual(viewModel.countValue, 10)
-        XCTAssertEqual(viewModel.countValueLabelText, "Times Pressed: 10")
-        XCTAssertEqual(viewModel.backgroundColour, .green)
-        XCTAssertEqual(viewModel.pressMeButtonIsEnabled, false)
+        XCTAssertEqual(self.sut.countValueLabelText, "Times Pressed: 10")
+        XCTAssertEqual(self.sut.backgroundColour, .green)
+        XCTAssertEqual(self.sut.pressMeButtonIsEnabled, false)
     }
     
+    // TODO: Add outgoing command expectation tests using MockViewModelDelegate
+    
+    // MARK: - Helpers
+    
+    private func tapPressMeButton(times: Int) {
+        for _ in 1...times {
+            self.sut.didTapPressMeButton()
+        }
+    }
+    
+}
+
+class MockViewModelDelegate: ViewModelDelegate {
+    public var backgroundColourDidChangeWasCalled = false
+    public var countValueLabelTextDidChangeWasCalled = false
+    public var pressMeButtonIsEnabledDidChangeWasCalled = false
+    
+    func backgroundColourDidChange() {
+        self.backgroundColourDidChangeWasCalled = true
+    }
+    
+    func countValueLabelTextDidChange() {
+        self.countValueLabelTextDidChangeWasCalled = true
+    }
+    
+    func pressMeButtonIsEnabledDidChange() {
+        self.pressMeButtonIsEnabledDidChangeWasCalled = true
+    }
 }
