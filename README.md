@@ -2,11 +2,11 @@
 
  -- Acceptance Criteria --
  
- WHEN  app is loaded
+ GIVEN  view is loaded
  THEN  should set background colour to yellow
  and   count label should be set to "Times Pressed: 0"
  and   press me button should be enabled
- 
+  
  WHEN  press me button is tapped
  THEN  should increment count value by 1
  and   should update count label

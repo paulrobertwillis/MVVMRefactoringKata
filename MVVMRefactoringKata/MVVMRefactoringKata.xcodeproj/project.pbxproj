@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6931E28A28E49B8F00000A38 /* ViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6931E28928E49B8F00000A38 /* ViewModelTests.swift */; };
+		6931E29128E49EB100000A38 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6931E29028E49EB100000A38 /* ViewModel.swift */; };
 		697D4D2328DE25C900CD55AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697D4D2228DE25C900CD55AB /* AppDelegate.swift */; };
 		697D4D2528DE25C900CD55AB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697D4D2428DE25C900CD55AB /* SceneDelegate.swift */; };
 		697D4D2728DE25C900CD55AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697D4D2628DE25C900CD55AB /* ViewController.swift */; };
@@ -15,7 +17,20 @@
 		697D4D2F28DE25CA00CD55AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 697D4D2D28DE25CA00CD55AB /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		6931E28B28E49B8F00000A38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 697D4D1728DE25C900CD55AB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 697D4D1E28DE25C900CD55AB;
+			remoteInfo = MVVMRefactoringKata;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		6931E28728E49B8F00000A38 /* MVVMRefactoringKataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MVVMRefactoringKataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6931E28928E49B8F00000A38 /* ViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTests.swift; sourceTree = "<group>"; };
+		6931E29028E49EB100000A38 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		697D4D1F28DE25C900CD55AB /* MVVMRefactoringKata.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MVVMRefactoringKata.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		697D4D2228DE25C900CD55AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		697D4D2428DE25C900CD55AB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -27,6 +42,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6931E28428E49B8F00000A38 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		697D4D1C28DE25C900CD55AB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -37,10 +59,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6931E28828E49B8F00000A38 /* MVVMRefactoringKataTests */ = {
+			isa = PBXGroup;
+			children = (
+				6931E28928E49B8F00000A38 /* ViewModelTests.swift */,
+			);
+			path = MVVMRefactoringKataTests;
+			sourceTree = "<group>";
+		};
 		697D4D1628DE25C900CD55AB = {
 			isa = PBXGroup;
 			children = (
 				697D4D2128DE25C900CD55AB /* MVVMRefactoringKata */,
+				6931E28828E49B8F00000A38 /* MVVMRefactoringKataTests */,
 				697D4D2028DE25C900CD55AB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				697D4D1F28DE25C900CD55AB /* MVVMRefactoringKata.app */,
+				6931E28728E49B8F00000A38 /* MVVMRefactoringKataTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -59,6 +91,7 @@
 				697D4D2228DE25C900CD55AB /* AppDelegate.swift */,
 				697D4D2428DE25C900CD55AB /* SceneDelegate.swift */,
 				697D4D2628DE25C900CD55AB /* ViewController.swift */,
+				6931E29028E49EB100000A38 /* ViewModel.swift */,
 				697D4D2828DE25C900CD55AB /* Main.storyboard */,
 				697D4D2B28DE25CA00CD55AB /* Assets.xcassets */,
 				697D4D2D28DE25CA00CD55AB /* LaunchScreen.storyboard */,
@@ -70,6 +103,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6931E28628E49B8F00000A38 /* MVVMRefactoringKataTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6931E28F28E49B8F00000A38 /* Build configuration list for PBXNativeTarget "MVVMRefactoringKataTests" */;
+			buildPhases = (
+				6931E28328E49B8F00000A38 /* Sources */,
+				6931E28428E49B8F00000A38 /* Frameworks */,
+				6931E28528E49B8F00000A38 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6931E28C28E49B8F00000A38 /* PBXTargetDependency */,
+			);
+			name = MVVMRefactoringKataTests;
+			productName = MVVMRefactoringKataTests;
+			productReference = 6931E28728E49B8F00000A38 /* MVVMRefactoringKataTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		697D4D1E28DE25C900CD55AB /* MVVMRefactoringKata */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 697D4D3328DE25CA00CD55AB /* Build configuration list for PBXNativeTarget "MVVMRefactoringKata" */;
@@ -97,6 +148,10 @@
 				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
+					6931E28628E49B8F00000A38 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = 697D4D1E28DE25C900CD55AB;
+					};
 					697D4D1E28DE25C900CD55AB = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
@@ -116,11 +171,19 @@
 			projectRoot = "";
 			targets = (
 				697D4D1E28DE25C900CD55AB /* MVVMRefactoringKata */,
+				6931E28628E49B8F00000A38 /* MVVMRefactoringKataTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6931E28528E49B8F00000A38 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		697D4D1D28DE25C900CD55AB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -134,17 +197,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6931E28328E49B8F00000A38 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6931E28A28E49B8F00000A38 /* ViewModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		697D4D1B28DE25C900CD55AB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				697D4D2728DE25C900CD55AB /* ViewController.swift in Sources */,
 				697D4D2328DE25C900CD55AB /* AppDelegate.swift in Sources */,
+				6931E29128E49EB100000A38 /* ViewModel.swift in Sources */,
 				697D4D2528DE25C900CD55AB /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6931E28C28E49B8F00000A38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 697D4D1E28DE25C900CD55AB /* MVVMRefactoringKata */;
+			targetProxy = 6931E28B28E49B8F00000A38 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		697D4D2828DE25C900CD55AB /* Main.storyboard */ = {
@@ -166,6 +246,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		6931E28D28E49B8F00000A38 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VNRW7375YF;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.paulrobertwillis.MVVMRefactoringKataTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MVVMRefactoringKata.app/MVVMRefactoringKata";
+			};
+			name = Debug;
+		};
+		6931E28E28E49B8F00000A38 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VNRW7375YF;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.paulrobertwillis.MVVMRefactoringKataTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MVVMRefactoringKata.app/MVVMRefactoringKata";
+			};
+			name = Release;
+		};
 		697D4D3128DE25CA00CD55AB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -339,6 +455,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6931E28F28E49B8F00000A38 /* Build configuration list for PBXNativeTarget "MVVMRefactoringKataTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6931E28D28E49B8F00000A38 /* Debug */,
+				6931E28E28E49B8F00000A38 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		697D4D1A28DE25C900CD55AB /* Build configuration list for PBXProject "MVVMRefactoringKata" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -9,11 +9,13 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    // MARK: - Private Properties
+    // MARK: - IBOutlets
     
     @IBOutlet private var mainView: UIView!
     @IBOutlet private weak var pressMeButton: UIButton!
     @IBOutlet private weak var countValueLabel: UILabel!
+    
+    // MARK: - Private Properties
     
     private var countValue: Int = 0
     
@@ -22,6 +24,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.countValueLabel.text = String(self.countValue)
+
     }
     
     // MARK: - IBActions
