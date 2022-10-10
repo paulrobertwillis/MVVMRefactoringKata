@@ -30,6 +30,13 @@ class MVVMRefactoringKataTests: XCTestCase {
     
     // MARK: - Tests
     
+    func test_givenViewModelIsLoaded_thenShouldBeConfiguredCorrectly() {
+        XCTAssert(self.sut.backgroundColour == .yellow)
+        XCTAssert(self.sut.countValue == 0)
+        XCTAssert(self.sut.isPressMeButtonEnabled == true)
+        XCTAssert(self.sut.countValueLabelText == "Times Pressed: 0")
+    }
+    
     func test_givenViewModelIsLoaded_whenButtonIsTapped_thenValuesShouldBeUpdatedAccordingly() {
         self.sut.didTabPressMeButton()
         
