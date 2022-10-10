@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ViewModelDelegate {
+protocol ViewModelDelegate: AnyObject {
     func backgroundColourDidChange()
     func countValueLabelTextDidChange()
     func pressMeButtonIsEnabledDidChange()
@@ -31,28 +31,33 @@ class ViewModel: ViewModelProtocol {
     
     // MARK: - Public Properties
     
-    var backgroundColour: UIColor {
+    var backgroundColour: UIColor = .green {
         didSet {
-            self.delegate.backgroundColourDidChange()
+            self.delegate?.backgroundColourDidChange()
         }
     }
     
     var countValueLabelText: String {
         didSet {
-            self.delegate.countValueLabelTextDidChange()
+            self.delegate?.countValueLabelTextDidChange()
         }
     }
     
-    var pressMeButtonIsEnabled: Bool {
+    var pressMeButtonIsEnabled: Bool = true {
         didSet {
-            self.delegate.pressMeButtonIsEnabledDidChange()
+            self.delegate?.pressMeButtonIsEnabledDidChange()
         }
     }
     
     // MARK: - Private Properties
     
-    private var countValue = 0
-    private let delegate: ViewModelDelegate
+    private var countValue = 0 {
+        didSet {
+            self.countValueDidChange()
+        }
+    }
+    
+    private weak var delegate: ViewModelDelegate?
     
     // MARK: - Init
     
@@ -70,11 +75,21 @@ class ViewModel: ViewModelProtocol {
             return
         }
         
+        self.incrementCountValue()
+    }
+    
+    // MARK: - Helpers
+    
+    private func incrementCountValue() {
         self.countValue += 1
-        
-        // TODO: Move this functionality
-        self.backgroundColour = self.countValue < 10 ? .yellow : .green
+    }
+    
+    private func countValueDidChange() {
         self.countValueLabelText = "Times Pressed: \(self.countValue)"
-        self.pressMeButtonIsEnabled = self.countValue < 10 ? true : false
+
+        if self.countValue >= 10 {
+            self.backgroundColour = .green
+            self.pressMeButtonIsEnabled = false
+        }
     }
 }
