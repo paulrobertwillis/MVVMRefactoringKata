@@ -14,31 +14,39 @@ protocol ViewModelDelegate {
     func didChangeCountValueLabelText()
 }
 
-public struct ViewModelConfig {
-    let backgroundColour: UIColor
-    let countValueLabelText: String
-    let isPressMeButtonEnabled: Bool
+protocol ViewModelProtocol {
+    var backgroundColour: UIColor { get }
+    var isPressMeButtonEnabled: Bool { get }
+    var countValueLabelText: String { get }
+
+    func didTapPressMeButton()
 }
 
 class ViewModel {
+    
+    struct Config {
+        let backgroundColour: UIColor
+        let countValueLabelText: String
+        let isPressMeButtonEnabled: Bool
+    }
     
     // MARK: - Public Properties
     
     var backgroundColour: UIColor {
         didSet {
-            self.delegate?.didChangeBackgroundColour()
+            self.delegate.didChangeBackgroundColour()
         }
     }
     
     var countValueLabelText: String {
         didSet {
-            self.delegate?.didChangeCountValueLabelText()
+            self.delegate.didChangeCountValueLabelText()
         }
     }
 
     var isPressMeButtonEnabled: Bool {
         didSet {
-            self.delegate?.didChangePressMeButtonState()
+            self.delegate.didChangePressMeButtonState()
         }
     }
     
@@ -50,27 +58,17 @@ class ViewModel {
         }
     }
     
-    private var delegate: ViewModelDelegate?
+    private var delegate: ViewModelDelegate
     
     // MARK: - Init
     
-    init(delegate: ViewModelDelegate, config: ViewModelConfig) {
+    init(delegate: ViewModelDelegate, config: Config) {
         self.delegate = delegate
         self.backgroundColour = config.backgroundColour
         self.countValueLabelText = config.countValueLabelText
         self.isPressMeButtonEnabled = config.isPressMeButtonEnabled
     }
 
-    // MARK: - API
-    
-    func didTabPressMeButton() {
-        guard self.isPressMeButtonEnabled else {
-            return
-        }
-        
-        self.incrementCountValue()
-    }
-    
     // MARK: - Helpers
     
     private func incrementCountValue() {
@@ -87,3 +85,14 @@ class ViewModel {
     }
 }
 
+// MARK: - ViewModelProtocol
+
+extension ViewModel: ViewModelProtocol {
+    func didTapPressMeButton() {
+        guard self.isPressMeButtonEnabled else {
+            return
+        }
+        
+        self.incrementCountValue()
+    }
+}

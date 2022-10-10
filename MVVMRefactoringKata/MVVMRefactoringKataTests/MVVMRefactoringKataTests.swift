@@ -22,7 +22,7 @@ class MVVMRefactoringKataTests: XCTestCase {
         
         self.delegate = MockViewModelDelegate()
         
-        let config = ViewModelConfig(
+        let config = ViewModel.Config(
             backgroundColour: .yellow,
             countValueLabelText: "Times Pressed: 0",
             isPressMeButtonEnabled: true
@@ -47,14 +47,14 @@ class MVVMRefactoringKataTests: XCTestCase {
     }
     
     func test_givenViewModelIsLoaded_whenButtonIsTapped_thenValuesShouldBeUpdatedAccordingly() {
-        self.sut.didTabPressMeButton()
+        self.sut.didTapPressMeButton()
         
         XCTAssert(self.sut.countValueLabelText == "Times Pressed: 1")
     }
     
     func test_givenViewModelIsLoaded_whenButtonIsTappedTwice_thenValuesShouldBeUpdatedAccordingly() {
-        self.sut.didTabPressMeButton()
-        self.sut.didTabPressMeButton()
+        self.sut.didTapPressMeButton()
+        self.sut.didTapPressMeButton()
         
         XCTAssert(self.sut.countValueLabelText == "Times Pressed: 2")
     }
@@ -62,7 +62,7 @@ class MVVMRefactoringKataTests: XCTestCase {
     func test_givenCountValueIsNine_whenButtonIsTapped_thenValuesShouldBeUpdatedAccordingly() {
         self.tapPressMeButton(times: 9)
         
-        self.sut.didTabPressMeButton()
+        self.sut.didTapPressMeButton()
         
         XCTAssert(self.sut.backgroundColour == .green)
         XCTAssert(self.sut.countValueLabelText == "Times Pressed: 10")
@@ -72,7 +72,7 @@ class MVVMRefactoringKataTests: XCTestCase {
     func test_givenCountValueisTen_whenButtonIsTapped_thenValuesShouldNotBeUpdated() {
         self.tapPressMeButton(times: 10)
         
-        self.sut.didTabPressMeButton()
+        self.sut.didTapPressMeButton()
         
         XCTAssert(self.sut.backgroundColour == .green)
         XCTAssert(self.sut.countValueLabelText == "Times Pressed: 10")
@@ -84,7 +84,7 @@ class MVVMRefactoringKataTests: XCTestCase {
     func test_givenCountValueIsNine_whenButtonIsTapped_thenDelegateFunctionsShouldBeCalled() {
         self.tapPressMeButton(times: 9)
         
-        self.sut.didTabPressMeButton()
+        self.sut.didTapPressMeButton()
                 
         XCTAssertTrue(self.delegate.didChangeBackgroundColourWasCalled)
         XCTAssertTrue(self.delegate.didChangePressMeButtonStateWasCalled)
@@ -95,7 +95,7 @@ class MVVMRefactoringKataTests: XCTestCase {
     
     private func tapPressMeButton(times: Int) {
         for _ in 1...times {
-            self.sut.didTabPressMeButton()
+            self.sut.didTapPressMeButton()
         }
     }
 }

@@ -17,9 +17,9 @@ class ViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private lazy var viewModel = ViewModel(
+    private lazy var viewModel: ViewModelProtocol = ViewModel(
         delegate: self,
-        config: ViewModelConfig(
+        config: ViewModel.Config(
             backgroundColour: .yellow,
             countValueLabelText: "Times Pressed: 0",
             isPressMeButtonEnabled: true
@@ -39,7 +39,7 @@ class ViewController: UIViewController {
     // MARK: - IBActions
 
     @IBAction func pressMeButtonTapped(_ sender: UIButton) {
-        self.viewModel.didTabPressMeButton()
+        self.viewModel.didTapPressMeButton()
     }
 }
 
