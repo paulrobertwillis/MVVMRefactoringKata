@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol ViewModelDelegate {
+protocol ViewModelDelegate: AnyObject {
     func didChangeBackgroundColour()
     func didChangePressMeButtonState()
     func didChangeCountValueLabelText()
@@ -34,19 +34,19 @@ class ViewModel {
     
     var backgroundColour: UIColor {
         didSet {
-            self.delegate.didChangeBackgroundColour()
+            self.delegate?.didChangeBackgroundColour()
         }
     }
     
     var countValueLabelText: String {
         didSet {
-            self.delegate.didChangeCountValueLabelText()
+            self.delegate?.didChangeCountValueLabelText()
         }
     }
 
     var isPressMeButtonEnabled: Bool {
         didSet {
-            self.delegate.didChangePressMeButtonState()
+            self.delegate?.didChangePressMeButtonState()
         }
     }
     
@@ -58,7 +58,7 @@ class ViewModel {
         }
     }
     
-    private var delegate: ViewModelDelegate
+    private weak var delegate: ViewModelDelegate?
     
     // MARK: - Init
     
