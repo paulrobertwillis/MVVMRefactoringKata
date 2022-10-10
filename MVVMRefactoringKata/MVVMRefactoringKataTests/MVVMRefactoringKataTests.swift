@@ -32,15 +32,13 @@ class MVVMRefactoringKataTests: XCTestCase {
     
     func test_givenViewModelIsLoaded_thenShouldBeConfiguredCorrectly() {
         XCTAssert(self.sut.backgroundColour == .yellow)
-        XCTAssert(self.sut.countValue == 0)
-        XCTAssert(self.sut.isPressMeButtonEnabled == true)
         XCTAssert(self.sut.countValueLabelText == "Times Pressed: 0")
+        XCTAssert(self.sut.isPressMeButtonEnabled == true)
     }
     
     func test_givenViewModelIsLoaded_whenButtonIsTapped_thenValuesShouldBeUpdatedAccordingly() {
         self.sut.didTabPressMeButton()
         
-        XCTAssert(self.sut.countValue == 1)
         XCTAssert(self.sut.countValueLabelText == "Times Pressed: 1")
     }
     
@@ -48,7 +46,34 @@ class MVVMRefactoringKataTests: XCTestCase {
         self.sut.didTabPressMeButton()
         self.sut.didTabPressMeButton()
         
-        XCTAssert(self.sut.countValue == 2)
         XCTAssert(self.sut.countValueLabelText == "Times Pressed: 2")
+    }
+    
+    func test_givenCountValueIsNine_whenButtonIsTapped_thenValuesShouldBeUpdatedAccordingly() {
+        self.tapPressMeButton(times: 9)
+        
+        self.sut.didTabPressMeButton()
+        
+        XCTAssert(self.sut.backgroundColour == .green)
+        XCTAssert(self.sut.countValueLabelText == "Times Pressed: 10")
+        XCTAssert(self.sut.isPressMeButtonEnabled == false)
+    }
+    
+    func test_givenCountValueisTen_whenButtonIsTapped_thenValuesShouldNotBeUpdated() {
+        self.tapPressMeButton(times: 10)
+        
+        self.sut.didTabPressMeButton()
+
+        XCTAssert(self.sut.backgroundColour == .green)
+        XCTAssert(self.sut.countValueLabelText == "Times Pressed: 10")
+        XCTAssert(self.sut.isPressMeButtonEnabled == false)
+    }
+    
+    // MARK: - Helpers
+    
+    private func tapPressMeButton(times: Int) {
+        for _ in 1...times {
+            self.sut.didTabPressMeButton()
+        }
     }
 }

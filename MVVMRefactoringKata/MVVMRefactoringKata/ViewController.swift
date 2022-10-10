@@ -15,27 +15,33 @@ class ViewController: UIViewController {
     @IBOutlet private weak var pressMeButton: UIButton!
     @IBOutlet private weak var countValueLabel: UILabel!
     
-    private var countValue: Int = 0 {
-        didSet {
-            self.countValueLabel.text = String("Times Pressed: \(self.countValue)")
-        }
-    }
+    // MARK: - Private Properties
     
+    private lazy var viewModel = ViewModel(delegate: self)
+        
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.countValueLabel.text = String("Times Pressed: \(self.countValue)")
+        
+        self.mainView.backgroundColor = self.viewModel.backgroundColour
+        self.pressMeButton.isEnabled = self.viewModel.isPressMeButtonEnabled
+        self.countValueLabel.text = self.viewModel.countValueLabelText
     }
     
     // MARK: - IBActions
 
     @IBAction func pressMeButtonTapped(_ sender: UIButton) {
-        self.countValue += 1
-        
-        if self.countValue == 10 {
-            self.pressMeButton.isEnabled = false
-            self.mainView.backgroundColor = .green
-        }
+        self.viewModel.didTabPressMeButton()
+    }
+}
+
+extension ViewController: ViewModelDelegate {
+    func didChangeBackgroundColour() {
+        self.mainView.backgroundColor = self.viewModel.backgroundColour
+    }
+    
+    func didChangePressMeButtonState() {
+        self.pressMeButton.isEnabled = self.viewModel.isPressMeButtonEnabled
     }
 }
