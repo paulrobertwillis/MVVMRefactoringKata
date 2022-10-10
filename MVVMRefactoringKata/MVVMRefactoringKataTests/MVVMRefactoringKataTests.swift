@@ -9,9 +9,10 @@ import XCTest
 @testable import MVVMRefactoringKata
 
 class MVVMRefactoringKataTests: XCTestCase {
-        
+    
     // MARK: - Private Variables
     
+    private var delegate: MockViewModelDelegate!
     private var sut: ViewModel!
     
     // MARK: - Lifecycle
@@ -19,10 +20,19 @@ class MVVMRefactoringKataTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        self.sut = ViewModel()
+        self.delegate = MockViewModelDelegate()
+        
+        let config = ViewModelConfig(
+            backgroundColour: .yellow,
+            countValueLabelText: "Times Pressed: 0",
+            isPressMeButtonEnabled: true
+        )
+        
+        self.sut = ViewModel(delegate: self.delegate, config: config)
     }
     
     override func tearDown() {
+        self.delegate = nil
         self.sut = nil
         
         super.tearDown()
@@ -63,10 +73,22 @@ class MVVMRefactoringKataTests: XCTestCase {
         self.tapPressMeButton(times: 10)
         
         self.sut.didTabPressMeButton()
-
+        
         XCTAssert(self.sut.backgroundColour == .green)
         XCTAssert(self.sut.countValueLabelText == "Times Pressed: 10")
         XCTAssert(self.sut.isPressMeButtonEnabled == false)
+    }
+    
+    // TODO: Add outgoing command expectations using MockViewModelDelegate
+    
+    func test_givenCountValueIsNine_whenButtonIsTapped_thenDelegateFunctionsShouldBeCalled() {
+        self.tapPressMeButton(times: 9)
+        
+        self.sut.didTabPressMeButton()
+                
+        XCTAssertTrue(self.delegate.didChangeBackgroundColourWasCalled)
+        XCTAssertTrue(self.delegate.didChangePressMeButtonStateWasCalled)
+        XCTAssertTrue(self.delegate.didChangeCountValueLabelTextWasCalled)
     }
     
     // MARK: - Helpers
@@ -75,5 +97,30 @@ class MVVMRefactoringKataTests: XCTestCase {
         for _ in 1...times {
             self.sut.didTabPressMeButton()
         }
+    }
+}
+
+class MockViewModelDelegate {
+    
+    // MARK: - Public Properties
+        
+    public var didChangeBackgroundColourWasCalled = false
+    public var didChangePressMeButtonStateWasCalled = false
+    public var didChangeCountValueLabelTextWasCalled = false
+}
+
+// MARK: - ViewModelDelegate
+
+extension MockViewModelDelegate: ViewModelDelegate {
+    func didChangeBackgroundColour() {
+        self.didChangeBackgroundColourWasCalled = true
+    }
+    
+    func didChangePressMeButtonState() {
+        self.didChangePressMeButtonStateWasCalled = true
+    }
+    
+    func didChangeCountValueLabelText() {
+        self.didChangeCountValueLabelTextWasCalled = true
     }
 }

@@ -11,24 +11,32 @@ import UIKit
 protocol ViewModelDelegate {
     func didChangeBackgroundColour()
     func didChangePressMeButtonState()
-//    func didChangeCountValueLabelText()
+    func didChangeCountValueLabelText()
+}
+
+public struct ViewModelConfig {
+    let backgroundColour: UIColor
+    let countValueLabelText: String
+    let isPressMeButtonEnabled: Bool
 }
 
 class ViewModel {
     
     // MARK: - Public Properties
     
-    var backgroundColour: UIColor = .yellow {
+    var backgroundColour: UIColor {
         didSet {
             self.delegate?.didChangeBackgroundColour()
         }
     }
     
-    lazy var countValueLabelText: String = {
-        "Times Pressed: \(self.countValue)"
-    }()
+    var countValueLabelText: String {
+        didSet {
+            self.delegate?.didChangeCountValueLabelText()
+        }
+    }
 
-    var isPressMeButtonEnabled: Bool = true {
+    var isPressMeButtonEnabled: Bool {
         didSet {
             self.delegate?.didChangePressMeButtonState()
         }
@@ -36,13 +44,21 @@ class ViewModel {
     
     // MARK: - Private Properties
     
-    private var countValue: Int = 0
+    private var countValue: Int = 0 {
+        didSet {
+            self.countValueDidChange()
+        }
+    }
+    
     private var delegate: ViewModelDelegate?
     
     // MARK: - Init
     
-    init(delegate: ViewModelDelegate) {
+    init(delegate: ViewModelDelegate, config: ViewModelConfig) {
         self.delegate = delegate
+        self.backgroundColour = config.backgroundColour
+        self.countValueLabelText = config.countValueLabelText
+        self.isPressMeButtonEnabled = config.isPressMeButtonEnabled
     }
 
     // MARK: - API
@@ -52,7 +68,17 @@ class ViewModel {
             return
         }
         
+        self.incrementCountValue()
+    }
+    
+    // MARK: - Helpers
+    
+    private func incrementCountValue() {
         self.countValue += 1
+    }
+    
+    private func countValueDidChange() {
+        self.countValueLabelText = "Times Pressed: \(self.countValue)"
         
         if self.countValue == 10 {
             self.isPressMeButtonEnabled = false

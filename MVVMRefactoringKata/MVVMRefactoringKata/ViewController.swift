@@ -17,7 +17,14 @@ class ViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private lazy var viewModel = ViewModel(delegate: self)
+    private lazy var viewModel = ViewModel(
+        delegate: self,
+        config: ViewModelConfig(
+            backgroundColour: .yellow,
+            countValueLabelText: "Times Pressed: 0",
+            isPressMeButtonEnabled: true
+        )
+    )
         
     // MARK: - Lifecycle
     
@@ -36,6 +43,8 @@ class ViewController: UIViewController {
     }
 }
 
+// MARK: - ViewModelDelegate
+
 extension ViewController: ViewModelDelegate {
     func didChangeBackgroundColour() {
         self.mainView.backgroundColor = self.viewModel.backgroundColour
@@ -43,5 +52,9 @@ extension ViewController: ViewModelDelegate {
     
     func didChangePressMeButtonState() {
         self.pressMeButton.isEnabled = self.viewModel.isPressMeButtonEnabled
+    }
+    
+    func didChangeCountValueLabelText() {
+        self.countValueLabel.text = self.viewModel.countValueLabelText
     }
 }
