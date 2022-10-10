@@ -16,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6931E29928F44B3C00000A38 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		697D4D1F28DE25C900CD55AB /* MVVMRefactoringKata.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MVVMRefactoringKata.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		697D4D2228DE25C900CD55AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		697D4D2428DE25C900CD55AB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +64,7 @@
 				697D4D2B28DE25CA00CD55AB /* Assets.xcassets */,
 				697D4D2D28DE25CA00CD55AB /* LaunchScreen.storyboard */,
 				697D4D3028DE25CA00CD55AB /* Info.plist */,
+				6931E29928F44B3C00000A38 /* README.md */,
 			);
 			path = MVVMRefactoringKata;
 			sourceTree = "<group>";
