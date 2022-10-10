@@ -8,10 +8,12 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    // MARK: - IBOutlets
 
-    @IBOutlet var mainView: UIView!
-    @IBOutlet weak var pressMeButton: UIButton!
-    @IBOutlet weak var countValueLabel: UILabel!
+    @IBOutlet private weak var mainView: UIView!
+    @IBOutlet private weak var pressMeButton: UIButton!
+    @IBOutlet private weak var countValueLabel: UILabel!
     
     private var countValue: Int = 0
     
@@ -21,6 +23,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.countValueLabel.text = String(self.countValue)
     }
+    
+    // MARK: - IBActions
 
     @IBAction func pressMeButtonTapped(_ sender: UIButton) {
         self.countValue += 1
